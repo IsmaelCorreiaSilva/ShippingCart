@@ -1,0 +1,19 @@
+.container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    h1{
+        margin: 4rem 0;
+        color: #996F57;
+    }
+}
+.content{
+    width: 1124px;
+    display: flex;
+    align-items: center;
+    //justify-content: space-around;
+    flex-wrap: wrap;
+}
