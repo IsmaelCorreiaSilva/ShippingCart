@@ -16,14 +16,14 @@ export function ListProductsPage() {
         then(data => setProducts(data))
         
     },[])
-    console.log(products)
+    //console.log(products)
     return (
         <div className={styles.container}>
             <h1>Lista Produtos</h1>
             <div className={styles.content}>
                 <Suspense>
                     {products.map(product =>(
-                        <CardProduct data={product}/>
+                        <CardProduct key={product.id} data={product}/>
                     ))}
                 </Suspense>
             </div>

@@ -1,12 +1,17 @@
+import { CartPage } from "./Pages/CartPage"
 import { ListProductsPage } from "./Pages/ListProductsPage"
 import { Header } from "./components/Header"
+import { CartProvider } from "./hooks/useCart"
 import './styles/global.scss'
 
 function App() {
-    return (
+  return (
     <>
-      <Header />
-      <ListProductsPage />
+      <CartProvider>
+        <Header />
+        <CartPage />
+        {/* <ListProductsPage /> */}
+      </CartProvider>
     </>
   )
 }
