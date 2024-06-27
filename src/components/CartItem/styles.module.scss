@@ -1,0 +1,47 @@
+.container{
+    width: 59,37rem;
+    height: 10rem;
+    padding: 1rem;
+    margin: 2rem;
+    border: 4px solid #996f57;
+    border-radius: 0.25rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    // &:first-child{
+    //     margin-top: 0;
+    // }
+    img{
+        width: 7.5rem;
+        height: auto;
+    }
+
+    span{
+        font-size: 1.25rem;
+        font-weight: 500;
+        color: #996f57;
+    }
+
+    .infoProduct{
+        max-width: 450px;
+    }
+
+    input{
+        width: 2.5rem;
+        height: 2rem;
+        color: #996f57;
+        border: 3px solid #996f57;
+        border-radius: 4px;
+        //text-align: center;
+        display: inline;
+        align-items: center;
+    }
+
+    svg{
+        width: 2rem;
+        height: 2rem;
+        color: #996f57;
+    }
+}

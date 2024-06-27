@@ -1,3 +1,4 @@
+import { CartItem } from '../../components/CartItem';
 import styles from './styles.module.scss'
 
 
@@ -7,7 +8,8 @@ export function CartPage() {
             <h1>Carrinho de Compras</h1>
             <div className={styles.content}>
                 <div className={styles.cartItens}>
-                    <span>Itens carrinho</span>
+                    {/* <span>Há itens no carrinho</span> */}
+                    <CartItem />
                 </div>
                 <div className={styles.cartInfo}>
                     <h2>RESUMO</h2>
