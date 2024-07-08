@@ -1,9 +1,9 @@
 import { useReducer } from 'react';
-import imgProduct from '../../assets/image/smart tv.webp'
 import styles from './styles.module.scss'
 
 import { IoCloseSharp } from "react-icons/io5";
 import { FaPlus, FaMinus } from "react-icons/fa";
+import { Product } from '../../types/ProductType';
 
 type State = {
     count: number;
@@ -22,14 +22,18 @@ function reducer(state:State, action:Action){
 
 const initializeState = { count: 1}
 
-export function CartItem() {
+interface CartItemProps{
+    data: Product;
+}
+
+export function CartItem({data}:CartItemProps) {
 
     const [state, dispatch] = useReducer(reducer, initializeState);
 
     return (
         <div className={styles.container}>
-            <img src={imgProduct} alt="" />
-            <span className={styles.infoProduct}>Dados do produto da loja X Dados do produto da loja X</span>
+            <img src={data.url_image} alt={data.title} />
+            <span className={styles.infoProduct}>{data.title}</span>
             <button onClick={() => dispatch({type:'decrement'})}>
                 <FaMinus className={styles.iconControls} />
             </button>
@@ -41,7 +45,7 @@ export function CartItem() {
                     new Intl.NumberFormat('pt-BR', {
                         style: 'currency',
                         currency: 'BRL'
-                    }).format(5000)
+                    }).format(data.amount * state.count)
                 }</span>
             <button
                 type="button"

@@ -15,7 +15,7 @@ export function CardProduct({data}:CardProductProps) {
 
     return (
         <div className={styles.container}>
-            <img src={data.url_image} alt="kkk" />
+            <img src={data.url_image} alt={data.title} />
 
             <span>{data.title}</span>
             <span>{

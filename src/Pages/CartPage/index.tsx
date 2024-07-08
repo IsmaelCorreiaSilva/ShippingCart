@@ -1,42 +1,16 @@
-import { CartItem } from '../../components/CartItem';
-import styles from './styles.module.scss'
+import { Cart } from "../../components/Cart";
+import { Header } from "../../components/Header";
+import { CartProvider } from "../../hooks/useCart";
+
 
 
 export function CartPage() {
-    return (
-        <div className={styles.container}>
-            <h1>Carrinho de Compras</h1>
-            <div className={styles.content}>
-                <div className={styles.cartItens}>
-                    {/* <span>Há itens no carrinho</span> */}
-                    <CartItem />
-                </div>
-                <div className={styles.cartInfo}>
-                    <h2>RESUMO</h2>
-                    <hr />
-                    <div>
-                        <span>Valores dos Produtos:</span>
-                        <span>R$5000,00</span>
-                    </div>
-                    <hr />
-                    <div>
-                        <span>Frete:</span>
-                        <span>R$5000,00</span>
-                    </div>
-
-                    <hr />
-                    <div>
-
-                        <span>Total à Prazo:</span>
-                        <span>R$5000,00</span>
-                    </div>
-                    <hr />
-                    <div>
-                        <span>Total à Vista no Pix:</span>
-                        <span>R$5000,00</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
+    return(
+        <>
+            <CartProvider>
+                <Header />
+                <Cart />
+            </CartProvider>
+        </>
+    )
 } 

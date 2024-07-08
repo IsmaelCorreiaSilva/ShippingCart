@@ -1,4 +1,3 @@
-import { CartPage } from "./Pages/CartPage"
 import { ListProductsPage } from "./Pages/ListProductsPage"
 import { Header } from "./components/Header"
 import { CartProvider } from "./hooks/useCart"
@@ -9,8 +8,8 @@ function App() {
     <>
       <CartProvider>
         <Header />
-        <CartPage />
-        {/* <ListProductsPage /> */}
+        {/* <CartPage /> */}
+        <ListProductsPage />
       </CartProvider>
     </>
   )
