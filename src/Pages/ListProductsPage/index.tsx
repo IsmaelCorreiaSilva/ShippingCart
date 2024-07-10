@@ -6,10 +6,12 @@ import { CartProvider } from "../../hooks/useCart";
 export function ListProductsPage() {
     return (
         <>
-            <CartProvider>
+            {/* <CartProvider>
                 <Header />
                 <ListProducts />
-            </CartProvider>
+            </CartProvider> */}
+            <Header />
+            <ListProducts />
         </>
     );
 }

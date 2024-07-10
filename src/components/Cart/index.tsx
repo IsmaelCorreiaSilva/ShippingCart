@@ -1,24 +1,37 @@
-import { Suspense } from 'react';
+import { Suspense, useState, useEffect } from 'react';
 import { useCart } from '../../hooks/useCart';
 import { CartItem } from '../CartItem';
 import styles from './styles.module.scss'
+import { Product } from '../../types/ProductType';
 
-export function Cart(){
-    const { itens } = useCart()
-    console.log(itens);
+export function Cart() {
+    const { getItensCart } = useCart()
+    const [itens, setItens] = useState<Product[]>([]);
+
+    console.log(itens)
+    useEffect(() => {
+        const data = getItensCart();
+        //console.log(data)
+        setItens(data)
+    }, [])
+
     return (
         <div className={styles.container}>
             <h1>Carrinho de Compras</h1>
             <div className={styles.content}>
                 <div className={styles.cartItens}>
-                    {/* <span>Há itens no carrinho</span> */}
-                    <Suspense>
-                        {
-                            itens.map(item =>(
-                                <CartItem key={item.id} data={item} />
-                            ))
-                        }
-                    </Suspense>
+                    {itens.length > 0 ?
+                        (
+                            <Suspense>
+                                {
+                                    itens.map(item => (
+                                        <CartItem key={item.id} data={item} />
+                                    ))
+                                }
+                            </Suspense>)
+                        :
+                        (<span>Há itens no carrinho</span>)
+                    }
                 </div>
                 <div className={styles.cartInfo}>
                     <h2>RESUMO</h2>

@@ -4,6 +4,7 @@ import styles from './styles.module.scss'
 import { IoCloseSharp } from "react-icons/io5";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { Product } from '../../types/ProductType';
+import { useCart } from '../../hooks/useCart';
 
 type State = {
     count: number;
@@ -28,7 +29,12 @@ interface CartItemProps{
 
 export function CartItem({data}:CartItemProps) {
 
+    const { removeItem } = useCart()
     const [state, dispatch] = useReducer(reducer, initializeState);
+
+    function handleClose(){
+        removeItem(data.id)
+    }
 
     return (
         <div className={styles.container}>
@@ -49,6 +55,7 @@ export function CartItem({data}:CartItemProps) {
                 }</span>
             <button
                 type="button"
+                onClick={handleClose}
             >
                 <IoCloseSharp  className={styles.iconClose}/>
             </button>

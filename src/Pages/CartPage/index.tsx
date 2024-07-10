@@ -7,10 +7,12 @@ import { CartProvider } from "../../hooks/useCart";
 export function CartPage() {
     return(
         <>
-            <CartProvider>
+            {/* <CartProvider>
                 <Header />
                 <Cart />
-            </CartProvider>
+            </CartProvider> */}
+            <Header />
+            <Cart />
         </>
     )
 } 

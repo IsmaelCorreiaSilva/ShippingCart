@@ -7,6 +7,7 @@ import { Model, createServer } from 'miragejs'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { CartPage } from './Pages/CartPage/index.tsx'
 import { ListProductsPage } from './Pages/ListProductsPage/index.tsx'
+import { CartProvider } from './hooks/useCart.tsx'
 
 createServer({
 
@@ -82,6 +83,9 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
+    <CartProvider>
+      
     <RouterProvider router={router} />
+    </CartProvider>
   </React.StrictMode>,
 )
