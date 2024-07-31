@@ -33,7 +33,7 @@ export function CartItem({data}:CartItemProps) {
     const [state, dispatch] = useReducer(reducer, initializeState);
 
     function handleClose(){
-        removeItem(data.id)
+        removeItem(data.id);
     }
 
     return (
@@ -43,7 +43,7 @@ export function CartItem({data}:CartItemProps) {
             <button onClick={() => dispatch({type:'decrement'})}>
                 <FaMinus className={styles.iconControls} />
             </button>
-            <input type="number" value={state.count} />
+            <input type="text" value={state.count} />
             <button onClick={() => dispatch({type:'increment'})}>
                 <FaPlus className={styles.iconControls} />
             </button>

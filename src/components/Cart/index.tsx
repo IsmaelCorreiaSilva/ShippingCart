@@ -5,33 +5,26 @@ import styles from './styles.module.scss'
 import { Product } from '../../types/ProductType';
 
 export function Cart() {
-    const { getItensCart } = useCart()
-    const [itens, setItens] = useState<Product[]>([]);
+    const { itens } = useCart()
+    //  
 
-    console.log(itens)
-    useEffect(() => {
-        const data = getItensCart();
-        //console.log(data)
-        setItens(data)
-    }, [])
+    // useEffect(() => {
+    //     const data = getItensCart();
+    //     setItens(data)
+    // }, [])
 
     return (
         <div className={styles.container}>
             <h1>Carrinho de Compras</h1>
             <div className={styles.content}>
                 <div className={styles.cartItens}>
-                    {itens.length > 0 ?
-                        (
-                            <Suspense>
-                                {
-                                    itens.map(item => (
-                                        <CartItem key={item.id} data={item} />
-                                    ))
-                                }
-                            </Suspense>)
-                        :
-                        (<span>Há itens no carrinho</span>)
-                    }
+                    <Suspense fallback="Sem itens no carrinho">
+                        {
+                            itens.map(item => (
+                                <CartItem key={item.id} data={item} />
+                            ))
+                        }
+                    </Suspense>
                 </div>
                 <div className={styles.cartInfo}>
                     <h2>RESUMO</h2>
@@ -48,7 +41,6 @@ export function Cart() {
 
                     <hr />
                     <div>
-
                         <span>Total à Prazo:</span>
                         <span>R$5000,00</span>
                     </div>
