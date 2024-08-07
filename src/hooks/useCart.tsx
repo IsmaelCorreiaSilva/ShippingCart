@@ -21,22 +21,23 @@ export function CartProvider({ children }: CartProviderProps) {
 
     useEffect(() => {
         const data = localStorage.getItem('ShoppingCart');
-
-        if (data !== null) {
+        //console.log(data)
+        if (data) {
             const itensCart = JSON.parse(data);
             setItens(itensCart)
         }
 
     }, [])
-    
+        
     useEffect(() => {
         const data = JSON.stringify(itens)
-        localStorage.setItem('ShoppingCart', data)
+        if(data)
+            localStorage.setItem('ShoppingCart', data)
+
     }, [itens])
 
     function addItem(item: Product) {
         setItens([...itens, item])
-        //console.log(itens)
     }
 
     // function addItem(item: Product) {

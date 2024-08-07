@@ -5,6 +5,7 @@ import { IoCloseSharp } from "react-icons/io5";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { Product } from '../../types/ProductType';
 import { useCart } from '../../hooks/useCart';
+import { useCartStore } from '../../stores/CartStore';
 
 type State = {
     count: number;
@@ -29,7 +30,8 @@ interface CartItemProps{
 
 export function CartItem({data}:CartItemProps) {
 
-    const { removeItem } = useCart()
+    //const { removeItem } = useCart()
+    const { removeItem } = useCartStore();
     const [state, dispatch] = useReducer(reducer, initializeState);
 
     function handleClose(){

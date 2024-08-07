@@ -3,9 +3,11 @@ import { useCart } from '../../hooks/useCart';
 import { CartItem } from '../CartItem';
 import styles from './styles.module.scss'
 import { Product } from '../../types/ProductType';
+import { useCartStore } from '../../stores/CartStore';
 
 export function Cart() {
-    const { itens } = useCart()
+    const { itens } = useCartStore();
+    /// const { itens } = useCart()
     //  
 
     // useEffect(() => {

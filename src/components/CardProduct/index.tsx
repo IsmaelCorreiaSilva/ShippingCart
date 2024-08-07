@@ -1,14 +1,16 @@
 import styles from './styles.module.scss'
 import { Product } from '../../types/ProductType';
 import { useCart } from '../../hooks/useCart';
+import { useCartStore } from '../../stores/CartStore';
 
 interface CardProductProps{
     data: Product;
 }
 export function CardProduct({data}:CardProductProps) {
 
-    const { addItem } = useCart();
-
+    const { addItem } = useCartStore();
+    //console.log(itens);
+    
     function handleAddItem(){
         addItem(data)
     }
