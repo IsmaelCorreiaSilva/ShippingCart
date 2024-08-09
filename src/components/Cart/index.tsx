@@ -1,19 +1,33 @@
-import { Suspense, useState, useEffect } from 'react';
-import { useCart } from '../../hooks/useCart';
+import { Suspense, useEffect, useState } from 'react';
 import { CartItem } from '../CartItem';
 import styles from './styles.module.scss'
-import { Product } from '../../types/ProductType';
 import { useCartStore } from '../../stores/CartStore';
 
 export function Cart() {
-    const { itens } = useCartStore();
-    /// const { itens } = useCart()
-    //  
 
-    // useEffect(() => {
-    //     const data = getItensCart();
-    //     setItens(data)
-    // }, [])
+    const [freight, setFreight] = useState<number>(Math.floor(Math.random() * 50));
+    const [totalTerm, setTotalTerm] = useState<number>(0);
+    const [totalInSight, setTotalInSight] = useState<number>(0);
+
+    const { itens } = useCartStore();
+
+    const value = itens.reduce((acc, item) => acc + (item.price * item.quantity), 0)
+
+    const formatter = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+    })
+
+    useEffect(() => {
+        if (itens.length > 0) {
+            setTotalTerm(value + freight);
+            setTotalInSight((value + freight) - ((value + freight) * 0.05));
+        }else{
+            setFreight(0);
+            setTotalInSight(0);
+            setTotalTerm(0);            
+        }
+    }, [value])
 
     return (
         <div className={styles.container}>
@@ -33,23 +47,23 @@ export function Cart() {
                     <hr />
                     <div>
                         <span>Valores dos Produtos:</span>
-                        <span>R$5000,00</span>
+                        <span>{itens.length > 0 ? formatter.format(value) : formatter.format(0)}</span>
                     </div>
                     <hr />
                     <div>
                         <span>Frete:</span>
-                        <span>R$5000,00</span>
+                        <span>{formatter.format(freight)}</span>
                     </div>
 
                     <hr />
                     <div>
                         <span>Total à Prazo:</span>
-                        <span>R$5000,00</span>
+                        <span>{formatter.format(totalTerm)}</span>
                     </div>
                     <hr />
                     <div>
                         <span>Total à Vista no Pix:</span>
-                        <span>R$5000,00</span>
+                        <span>{formatter.format(totalInSight)}</span>
                     </div>
                 </div>
             </div>

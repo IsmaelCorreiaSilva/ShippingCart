@@ -1,35 +1,32 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
-import { Product } from '../types/ProductType'
+import { ItemCart, Product } from '../types/ProductType'
 
 interface CartStoreProps {
-    itens: Product[],
-    addItem: (product: Product) => void;
-    removeItem: (productId: number) => void;
+    itens: ItemCart[],
+    addItem: (itemCart: ItemCart) => void;
+    removeItem: (itemId: number) => void;
+    updateItem: (itemUpdate: ItemCart) => void;
 }
-export const useCartStore = create<CartStoreProps>(
-    (set) => ({
-        itens: [],
-        addItem: (product: Product) => set(
-            (state) => ({ itens: [...state.itens, product] })
-        ),
-        removeItem: (productId: number) => set(
-            (state) => ({ itens: state.itens.filter(item => item.id !== productId) })
-        )
-    })
-    // persist(
-    //     (set) => ({
-    //         itens: [],
-    //         addItem: (product: Product) => set(
-    //             (state) => ({ itens: [...state.itens, product] })
-    //         ),
-    //         removeItem: (productId: number) => set(
-    //             (state) => ({ itens: state.itens.filter(item => item.id !== productId) })
-    //         )
-    //     }), 
-    //     {
-    //         name: 'cart-store',
-    //         storage: createJSONStorage(()=> sessionStorage)
-    //     }
-    // )
+
+export const useCartStore = create< CartStoreProps>()(
+    
+    persist(
+        (set) => ({
+            itens: [],
+            addItem: (itemCart: ItemCart) =>
+                 set((state) => ({ itens: [...state.itens.filter(item => item.id !== itemCart.id), itemCart] })
+            ),
+            removeItem: (itemId: number) => set(
+                (state) => ({ itens: state.itens.filter(item => item.id !== itemId) })
+            ),
+            updateItem: (itemCart: ItemCart) =>
+                set((state) =>({itens: state.itens.map(item => item.id === itemCart.id ? ({...item, quantity: itemCart.quantity}) as ItemCart : item)})
+            )
+        }), 
+        {
+            name: 'cart-store',
+            storage: createJSONStorage(()=> sessionStorage)
+        }
+    )
 )

@@ -1,6 +1,5 @@
 import styles from './styles.module.scss'
-import { Product } from '../../types/ProductType';
-import { useCart } from '../../hooks/useCart';
+import { Product, ItemCart } from '../../types/ProductType';
 import { useCartStore } from '../../stores/CartStore';
 
 interface CardProductProps{
@@ -9,10 +8,17 @@ interface CardProductProps{
 export function CardProduct({data}:CardProductProps) {
 
     const { addItem } = useCartStore();
-    //console.log(itens);
     
     function handleAddItem(){
-        addItem(data)
+        const item: ItemCart = {
+            id: data.id,
+            title: data.title,
+            price: data.price,
+            url_image: data.url_image,
+            quantity: 1
+        }
+        
+        addItem(item)
     }
 
     return (
@@ -24,7 +30,7 @@ export function CardProduct({data}:CardProductProps) {
                     new Intl.NumberFormat('pt-BR', {
                         style: 'currency',
                         currency: 'BRL'
-                    }).format(data.amount)
+                    }).format(data.price)
                 }
             </span>
             <button 

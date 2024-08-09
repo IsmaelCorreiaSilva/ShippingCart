@@ -1,10 +1,9 @@
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import styles from './styles.module.scss'
 
 import { IoCloseSharp } from "react-icons/io5";
 import { FaPlus, FaMinus } from "react-icons/fa";
-import { Product } from '../../types/ProductType';
-import { useCart } from '../../hooks/useCart';
+import { ItemCart, Product } from '../../types/ProductType';
 import { useCartStore } from '../../stores/CartStore';
 
 type State = {
@@ -30,14 +29,24 @@ interface CartItemProps{
 
 export function CartItem({data}:CartItemProps) {
 
-    //const { removeItem } = useCart()
-    const { removeItem } = useCartStore();
+    const { removeItem, updateItem } = useCartStore();
     const [state, dispatch] = useReducer(reducer, initializeState);
 
     function handleClose(){
         removeItem(data.id);
     }
 
+    useEffect(()=>{
+        const item: ItemCart = {
+            id: data.id,
+            title: data.title,
+            price: data.price,
+            url_image: data.url_image,
+            quantity: state.count
+        }
+        updateItem(item)
+    },[state.count])
+    
     return (
         <div className={styles.container}>
             <img src={data.url_image} alt={data.title} />
@@ -53,7 +62,7 @@ export function CartItem({data}:CartItemProps) {
                     new Intl.NumberFormat('pt-BR', {
                         style: 'currency',
                         currency: 'BRL'
-                    }).format(data.amount * state.count)
+                    }).format(data.price * state.count)
                 }</span>
             <button
                 type="button"
